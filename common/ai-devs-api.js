@@ -58,7 +58,8 @@ export async function sendAnswer(answer, token) {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            console.error('Ugh, sendAnswer got not ok status. Result:', await response.json());
+            throw new Error(`Network response was not ok - status ${response.status}`);
         }
 
         return await response.json();
