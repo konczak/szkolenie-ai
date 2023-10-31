@@ -5,6 +5,7 @@ import {day04Moderation} from './day04/moderation.js';
 import {inspect} from 'util';
 import {day04Blog} from './day04/blogger.js';
 import {day05Liar} from './day05/liar.js';
+import {day06Inprompt} from './day06/inprompt.js';
 
 dotenv.config();
 
@@ -14,5 +15,6 @@ if (1 === 0) {
   day01();
   day04Moderation();
   day04Blog();
+  day05Liar();
 }
-day05Liar();
+day06Inprompt();
