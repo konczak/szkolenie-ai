@@ -39,4 +39,12 @@ export async function completion({system, context, instruction, user}) {
   });
 }
 
+export async function embedding(input) {
+  const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_API_KEY,
+  });
+
+  return openai.embeddings.create({input, model: 'text-embedding-ada-002'})
+}
+
 
