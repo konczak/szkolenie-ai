@@ -48,3 +48,10 @@ export async function embedding(input) {
 }
 
 
+export async function transcribe(urlToAudioFile) {
+  const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_API_KEY,
+  });
+
+  return openai.audio.transcriptions.create({file: await fetch(urlToAudioFile), model: 'whisper-1'});
+}
