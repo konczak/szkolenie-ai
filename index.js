@@ -9,6 +9,7 @@ import {day06Inprompt} from './day06/inprompt.js';
 import {day07Embedding} from './day07/embedding.js';
 import {day08whisper} from './day08/whisper.js';
 import {day09functions} from './day09/functions.js';
+import {day10rodo} from './day10/rodo.js';
 
 dotenv.config();
 
@@ -22,5 +23,6 @@ if (1 === 0) {
   day06Inprompt();
   day07Embedding();
   day08whisper();
+  day09functions();
 }
-day09functions();
+day10rodo();
