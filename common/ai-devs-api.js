@@ -49,13 +49,16 @@ export async function sendAnswer(answer, token) {
     answer,
   };
 
+  const requestBodyJson = JSON.stringify(requestBody);
+  console.log('JSON.stringify(requestBody)', requestBodyJson);
+
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestBody),
+      body: requestBodyJson,
     });
 
     if (!response.ok) {
@@ -67,6 +70,16 @@ export async function sendAnswer(answer, token) {
   } catch (error) {
     console.error('Fetch error:', error);
     throw new Error(`Ups, some error occurred during sendAnswer: ${error.message}`);
+  }
+}
+
+export async function sendAnswerWithRetries(answer, token, maxRetries) {
+  try {
+    const response = await sendAnswer(answer, token);
+    return await response.json();
+  } catch (error) {
+    if (maxRetries === 0) throw error;
+    return sendAnswerWithRetries(answer, token, maxRetries - 1);
   }
 }
 
@@ -93,3 +106,18 @@ export async function exchangeQuestionIntoAnswer(question, token) {
   }
 }
 
+export async function testAnswerAgainstEcho(answer) {
+  const taskName = 'echo';
+  const authResult = await authorize(taskName, process.env.AI_DEVS_API_KEY);
+
+  if (authResult.code !== 0) {
+    console.error('ups authorize code is not 0')
+  }
+
+  const {token} = authResult;
+  const task = await getTask(token);
+  console.log('echo task', task);
+
+  const result = await sendAnswer(answer, token);
+  console.log('echo result', result);
+}

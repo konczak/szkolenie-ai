@@ -11,7 +11,7 @@ export async function moderationCheck(input) {
   });
 }
 
-export async function completion({system, context, instruction, user}) {
+export async function completion({system, context, instruction, user, maxTokens}) {
   const openai = new OpenAI({
     apiKey: process.env.OPEN_AI_API_KEY,
   });
@@ -32,10 +32,16 @@ export async function completion({system, context, instruction, user}) {
 
   messages.push({role: 'user', content: user});
 
+  let max_tokens = undefined;
+  if (maxTokens) {
+    max_tokens = maxTokens;
+  }
+
   return openai.chat.completions.create({
     messages,
     temperature: 0.5,
     model: 'gpt-3.5-turbo',
+    max_tokens,
   });
 }
 

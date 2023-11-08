@@ -10,6 +10,7 @@ import {day07Embedding} from './day07/embedding.js';
 import {day08whisper} from './day08/whisper.js';
 import {day09functions} from './day09/functions.js';
 import {day10rodo} from './day10/rodo.js';
+import {day11scraper} from './day11/scraper.js';
 
 dotenv.config();
 
@@ -24,5 +25,6 @@ if (1 === 0) {
   day07Embedding();
   day08whisper();
   day09functions();
+  day10rodo();
 }
-day10rodo();
+day11scraper();
