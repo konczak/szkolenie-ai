@@ -32,7 +32,7 @@ export async function getTask(token) {
     const response = await fetch(url);
 
     if (!response.ok) {
-      console.error('Ugh, sendAnswer got not ok status. Result:', await response.json());
+      console.error('Ugh, sendAnswer got not ok status. Result:', await response.text());
       throw new Error(`Network response was not ok - status ${response.status}`);
     }
 
