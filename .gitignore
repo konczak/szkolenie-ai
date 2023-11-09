@@ -61,3 +61,8 @@ dist
 
 # IntelliJ
 out/
+
+# custom for project
+
+# folder for mount qdrant db from Docker used in the project
+qdrant_storage/
