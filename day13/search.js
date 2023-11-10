@@ -1,7 +1,7 @@
 import {authorize, getTask, sendAnswer} from '../common/ai-devs-api.js';
 import {embedding} from '../common/openai-api.js';
 import {v4 as uuidv4} from 'uuid';
-import {createCollection, findOne, getCollectionInfo, getQdrantCollections, insertInto} from '../common/qdrant-db.js';
+import {createCollection, findOne, getCollectionInfo, insertInto, isCollectionIndexed} from '../common/qdrant-db.js';
 
 
 const TASK_NAME = 'search';
@@ -21,13 +21,6 @@ async function getToken() {
 async function getTodayTask() {
   const token = await getToken();
   return await getTask(token);
-}
-
-async function isCollectionIndexed(collectionName) {
-  const collections = await getQdrantCollections();
-
-  const indexed = collections.collections.find((collection) => collection.name === collectionName);
-  return !!indexed;
 }
 
 async function insertDocuments(fileContent) {

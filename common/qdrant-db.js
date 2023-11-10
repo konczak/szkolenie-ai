@@ -7,6 +7,13 @@ export async function getQdrantCollections() {
   return await qdrant.getCollections();
 }
 
+export async function isCollectionIndexed(collectionName) {
+  const collections = await getQdrantCollections();
+
+  const indexed = collections.collections.find((collection) => collection.name === collectionName);
+  return !!indexed;
+}
+
 export async function createCollection(collectionName) {
   await qdrant.createCollection(collectionName, {vectors: {size: 1536, distance: 'Cosine', on_disk: true}});
 }
@@ -27,11 +34,12 @@ export async function insertInto(collectionName, points) {
   });
 }
 
-export async function findOne(collectionName, queryEmbedding) {
-  return await qdrant.search(collectionName, {
-    vector: queryEmbedding,
-    limit: 1,
-    filter: {
+export async function findOne(collectionName, queryEmbedding, customFilter) {
+  let filter;
+  if (customFilter) {
+    filter = customFilter;
+  } else {
+    filter = {
       must: [
         {
           key: 'collection',
@@ -40,6 +48,14 @@ export async function findOne(collectionName, queryEmbedding) {
           }
         }
       ]
-    }
+    };
+  }
+
+  console.log('findOne - going to use filter', filter);
+
+  return await qdrant.search(collectionName, {
+    vector: queryEmbedding,
+    limit: 1,
+    filter,
   });
 }
