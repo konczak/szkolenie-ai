@@ -1,0 +1,26 @@
+### OBTAIN AUTH
+POST https://zadania.aidevs.pl/token/{{ai-devs-task}}
+Content-Type: application/json
+
+{
+  "apikey": "{{ai-devs-api-key}}"
+}
+
+> {%
+    client.global.set("ai-devs-auth-token", response.body.token);
+%}
+
+### GET TASK
+GET https://zadania.aidevs.pl/task/{{ai-devs-auth-token}}
+
+### SEND ANSWER
+POST https://zadania.aidevs.pl/answer/{{ai-devs-auth-token}}
+Content-Type: application/json
+
+{
+  "answer": {
+    "tool": "ToDo",
+    "desc": "Zapisać się na AI Devs 3.0"
+  }
+}
+
