@@ -14,6 +14,7 @@ import {day11scraper} from './day11/scraper.js';
 import {day12whoami} from './day12/whoami.js';
 import {day13search} from './day13/search.js';
 import {day14people} from './day14/people.js';
+import {day15knowledge} from './day15/knowledge.js';
 
 dotenv.config();
 
@@ -32,5 +33,6 @@ if (1 === 0) {
   day11scraper();
   day12whoami();
   day13search();
+  day14people();
 }
-day14people();
+day15knowledge();
