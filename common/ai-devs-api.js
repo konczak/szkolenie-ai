@@ -25,6 +25,17 @@ export async function authorize(taskName, apiKey) {
   }
 }
 
+export async function getToken(taskName) {
+  const authResult = await authorize(taskName, process.env.AI_DEVS_API_KEY);
+
+  if (authResult.code !== 0) {
+    console.error('ups authorize code is not 0')
+  }
+
+  const {token} = authResult;
+  return token;
+}
+
 export async function getTask(token) {
   const url = `https://zadania.aidevs.pl/task/${token}`;
 

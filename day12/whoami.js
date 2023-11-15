@@ -1,21 +1,10 @@
-import {authorize, getTask, sendAnswer} from '../common/ai-devs-api.js';
+import {getTask, getToken, sendAnswer} from '../common/ai-devs-api.js';
 import {completionWithConversation} from '../common/openai-api.js';
 
 const TASK_NAME = 'whoami';
 
-async function getToken() {
-  const authResult = await authorize(TASK_NAME, process.env.AI_DEVS_API_KEY);
-
-  if (authResult.code !== 0) {
-    console.error('ups authorize code is not 0')
-  }
-
-  const {token} = authResult;
-  return token;
-}
-
 async function getTip() {
-  const token = await getToken();
+  const token = await getToken(TASK_NAME);
   return await getTask(token);
 }
 
@@ -56,7 +45,7 @@ export async function day12whoami() {
     }
   } while (!guessed);
 
-  const token = await getToken();
+  const token = await getToken(TASK_NAME);
   const result = await sendAnswer(answer, token);
   console.log('result', result);
 }

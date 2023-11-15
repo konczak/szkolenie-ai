@@ -1,18 +1,7 @@
-import {authorize, getTask, sendAnswer} from '../common/ai-devs-api.js';
+import {getTask, getToken, sendAnswer} from '../common/ai-devs-api.js';
 import {completion} from '../common/openai-api.js';
 
 const TASK_NAME = 'tools';
-
-async function getToken() {
-  const authResult = await authorize(TASK_NAME, process.env.AI_DEVS_API_KEY);
-
-  if (authResult.code !== 0) {
-    console.error('ups authorize code is not 0')
-  }
-
-  const {token} = authResult;
-  return token;
-}
 
 async function analyseTask(question) {
   const system = 'Analyse given sentence meaning something to do, do not answer it, extract details what about task is';
@@ -32,7 +21,7 @@ async function analyseTask(question) {
 }
 
 export async function day16tools() {
-  const token = await getToken();
+  const token = await getToken(TASK_NAME);
   const task = await getTask(token);
   console.log('task', task);
 

@@ -1,21 +1,10 @@
-import {authorize, getTask, sendAnswerWithRetries, testAnswerAgainstEcho} from '../common/ai-devs-api.js';
+import {getTask, getToken, sendAnswerWithRetries, testAnswerAgainstEcho} from '../common/ai-devs-api.js';
 import {completion} from '../common/openai-api.js';
 
 const TASK_NAME = 'scraper';
 
-async function getToken() {
-  const authResult = await authorize(TASK_NAME, process.env.AI_DEVS_API_KEY);
-
-  if (authResult.code !== 0) {
-    console.error('ups authorize code is not 0')
-  }
-
-  const {token} = authResult;
-  return token;
-}
-
 export async function day11scraper() {
-  let token = await getToken();
+  let token = await getToken(TASK_NAME);
 
   const task = await getTask(token);
   console.log('task', task);
@@ -37,7 +26,7 @@ export async function day11scraper() {
   console.log('echoResult', echoResult);
 
   // refresh token as in most cases is expired
-  token = await getToken();
+  token = await getToken(TASK_NAME);
 
   const maxRetries = 3;
   const result = await sendAnswerWithRetries(answer, token, maxRetries);

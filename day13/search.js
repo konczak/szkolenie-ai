@@ -1,4 +1,4 @@
-import {authorize, getTask, sendAnswer} from '../common/ai-devs-api.js';
+import {getTask, getToken, sendAnswer} from '../common/ai-devs-api.js';
 import {embedding} from '../common/openai-api.js';
 import {v4 as uuidv4} from 'uuid';
 import {createCollection, findOne, getCollectionInfo, insertInto, isCollectionIndexed} from '../common/qdrant-db.js';
@@ -7,19 +7,8 @@ import {createCollection, findOne, getCollectionInfo, insertInto, isCollectionIn
 const TASK_NAME = 'search';
 const COLLECTION_NAME = 'szkolenie_day13_search';
 
-async function getToken() {
-  const authResult = await authorize(TASK_NAME, process.env.AI_DEVS_API_KEY);
-
-  if (authResult.code !== 0) {
-    console.error('ups authorize code is not 0')
-  }
-
-  const {token} = authResult;
-  return token;
-}
-
 async function getTodayTask() {
-  const token = await getToken();
+  const token = await getToken(TASK_NAME);
   return await getTask(token);
 }
 
@@ -100,7 +89,7 @@ export async function day13search() {
   console.log('foundAnswer', foundAnswer);
 
   const answer = foundAnswer[0].payload.url;
-  const token = await getToken();
+  const token = await getToken(TASK_NAME);
   const result = await sendAnswer(answer, token);
   console.log('result', result);
 }
