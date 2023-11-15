@@ -14,11 +14,6 @@ async function getToken() {
   return token;
 }
 
-async function getTodayTask() {
-  const token = await getToken();
-  return await getTask(token);
-}
-
 async function analyseTask(question) {
   const system = 'Analyse given sentence meaning something to do, do not answer it, extract details what about task is';
   const instruction = `
@@ -36,16 +31,9 @@ async function analyseTask(question) {
   return JSON.parse(completionResult.choices[0].message.content);
 }
 
-async function submitAnswer(answer) {
-  console.log('the final answer', answer);
-
-  const token = await getToken();
-  const result = await sendAnswer(answer, token);
-  console.log('result', result);
-}
-
 export async function day16tools() {
-  const task = await getTodayTask();
+  const token = await getToken();
+  const task = await getTask(token);
   console.log('task', task);
 
   const question = task.question;
@@ -62,7 +50,6 @@ export async function day16tools() {
 
   console.log('q vs a', question, processed);
 
-  // await testAnswerAgainstEcho(processed);
-
-  await submitAnswer(processed);
+  const result = await sendAnswer(processed, token);
+  console.log('result', result);
 }
