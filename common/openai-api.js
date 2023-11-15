@@ -45,6 +45,38 @@ export async function completion({system, context, instruction, user, maxTokens}
   });
 }
 
+export async function imageAnalysis({user, imageUrl, maxTokens}) {
+  const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_API_KEY,
+  });
+
+  const messages = [];
+
+  messages.push({
+    role: 'user', content: [
+      {type: 'text', text: user},
+      {
+        type: 'image_url',
+        image_url: {
+          'url': imageUrl,
+        },
+      },
+    ]
+  });
+
+  let max_tokens = undefined;
+  if (maxTokens) {
+    max_tokens = maxTokens;
+  }
+
+  return openai.chat.completions.create({
+    messages,
+    temperature: 0.5,
+    model: 'gpt-4-vision-preview',
+    max_tokens,
+  });
+}
+
 export async function completionWithConversation({system, context, instruction, earlierChats, user, maxTokens}) {
   const openai = new OpenAI({
     apiKey: process.env.OPEN_AI_API_KEY,
