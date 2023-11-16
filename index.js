@@ -17,6 +17,7 @@ import {day14people} from './day14/people.js';
 import {day15knowledge} from './day15/knowledge.js';
 import {day16tools} from './day16/tools.js';
 import {day17gnome} from './day17/gnome.js';
+import {day18ownapi} from './day18ownapi/ownapi.js';
 
 dotenv.config();
 
@@ -38,5 +39,6 @@ if (1 === 0) {
   day14people();
   day15knowledge();
   day16tools();
+  day17gnome();
 }
-day17gnome();
+day18ownapi();
