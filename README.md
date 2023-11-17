@@ -23,3 +23,16 @@ docker run -p 6333:6333 -v ./qdrant_storage:/qdrant/storage qdrant/qdrant
 > - :worried: for Git Bash on Windows do not know the proper command,  
 
 qdrant has web client accessible on http://localhost:6333/dashboard
+
+# ngrok
+
+To expose locally running API use ngrok. It is a tool that creates a tunnel to your local machine. 
+It is useful when you want to expose your local API to the internet.
+
+Assuming configuration is done and token is register use command:
+
+`ngrok http http://localhost:8080`
+
+what will proxy all requests from ngrok to app.
+From command result you can get public url to app.
+
