@@ -19,6 +19,7 @@ import {day16tools} from './day16/tools.js';
 import {day17gnome} from './day17/gnome.js';
 import {day18ownapi} from './day18/ownapi.js';
 import {day19ownapipro} from './day19/ownapipro.js';
+import {day20meme} from './day20/meme.js';
 
 dotenv.config();
 
@@ -42,5 +43,6 @@ if (1 === 0) {
   day16tools();
   day17gnome();
   day18ownapi();
+  day19ownapipro();
 }
-day19ownapipro();
+day20meme();

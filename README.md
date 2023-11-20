@@ -9,6 +9,7 @@ Values can be found:
 - `AI_DEVS_API_KEY` https://zadania.aidevs.pl/
 - `OPEN_AI_API_KEY` https://platform.openai.com/account/api-keys
 - `QDRANT_URL` http://localhost:6333
+- `RENDER_FORM_API_KEY` https://renderform.io/console/api-keys/
 
 # qdrant db
 Docker command to run qdrant (vector database):
