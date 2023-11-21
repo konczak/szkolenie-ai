@@ -20,6 +20,7 @@ import {day17gnome} from './day17/gnome.js';
 import {day18ownapi} from './day18/ownapi.js';
 import {day19ownapipro} from './day19/ownapipro.js';
 import {day20meme} from './day20/meme.js';
+import {day21optimaldb} from './day21/optimaldb.js';
 
 dotenv.config();
 
@@ -44,5 +45,6 @@ if (1 === 0) {
   day17gnome();
   day18ownapi();
   day19ownapipro();
+  day20meme();
 }
-day20meme();
+day21optimaldb();
