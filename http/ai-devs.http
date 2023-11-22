@@ -18,6 +18,6 @@ POST https://zadania.aidevs.pl/answer/{{ai-devs-auth-token}}
 Content-Type: application/json
 
 {
-  "answer": "https://cdn.renderform.io/KpCN42gOLei5fLa6GEkD/results/req-37be491b-b376-4319-af87-3393ac61cc75.jpg"
+  "answer": "{{my-api-public-url}}"
 }
 

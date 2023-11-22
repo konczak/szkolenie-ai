@@ -10,6 +10,7 @@ Values can be found:
 - `OPEN_AI_API_KEY` https://platform.openai.com/account/api-keys
 - `QDRANT_URL` http://localhost:6333
 - `RENDER_FORM_API_KEY` https://renderform.io/console/api-keys/
+- `SERP_API_API_KEY` https://serpapi.com/dashboard
 
 # qdrant db
 Docker command to run qdrant (vector database):

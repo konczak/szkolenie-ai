@@ -21,6 +21,7 @@ import {day18ownapi} from './day18/ownapi.js';
 import {day19ownapipro} from './day19/ownapipro.js';
 import {day20meme} from './day20/meme.js';
 import {day21optimaldb} from './day21/optimaldb.js';
+import {day22google} from './day22/google.js';
 
 dotenv.config();
 
@@ -46,5 +47,6 @@ if (1 === 0) {
   day18ownapi();
   day19ownapipro();
   day20meme();
+  day21optimaldb();
 }
-day21optimaldb();
+day22google();
