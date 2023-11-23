@@ -11,7 +11,7 @@ export async function moderationCheck(input) {
   });
 }
 
-export async function completion({system, context, instruction, user, maxTokens}) {
+export async function completion({system, context, instruction, user, maxTokens, model = 'gpt-3.5-turbo'}) {
   const openai = new OpenAI({
     apiKey: process.env.OPEN_AI_API_KEY,
   });
@@ -40,7 +40,7 @@ export async function completion({system, context, instruction, user, maxTokens}
   return openai.chat.completions.create({
     messages,
     temperature: 0.5,
-    model: 'gpt-3.5-turbo',
+    model,
     max_tokens,
   });
 }
